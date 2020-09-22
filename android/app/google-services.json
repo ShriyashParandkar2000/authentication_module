@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:946949620093:android:412dfd7e88ac01c79d8c14",
+        "mobilesdk_app_id": "1:946949620093:android:60f5823be7ab2e139d8c14",
         "android_client_info": {
-          "package_name": "om.example.authentication_module"
+          "package_name": "com.example.authentication_module"
         }
       },
       "oauth_client": [
