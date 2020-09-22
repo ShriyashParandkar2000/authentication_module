@@ -1,28 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-import 'SignIn.dart';
-
-void main() => runApp(MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: HomePage(),
-    ));
-
-class HomePage extends StatelessWidget {
+class StudentSignUP extends StatelessWidget {
   @override
-  final _phoneController = TextEditingController();
-  final _passController = TextEditingController();
-
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        brightness: Brightness.light,
-        elevation: 0,
-        backgroundColor: Colors.orange[900],
-        bottomOpacity: 0.0,
-        leading: IconButton(
-            icon: Icon(Icons.menu), color: Colors.black87, onPressed: () {}),
-      ),
       body: Container(
         width: double.infinity,
         decoration: BoxDecoration(
@@ -45,7 +27,7 @@ class HomePage extends StatelessWidget {
                   FadeAnimation(
                       1,
                       Text(
-                        "Student Login",
+                        "Student Sign Up",
                         style: TextStyle(color: Colors.white, fontSize: 40),
                       )),
                   SizedBox(
@@ -54,7 +36,7 @@ class HomePage extends StatelessWidget {
                   FadeAnimation(
                       1.3,
                       Text(
-                        "Welcome Back",
+                        "Welcome",
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       )),
                 ],
@@ -98,11 +80,24 @@ class HomePage extends StatelessWidget {
                                                 color: Colors.grey[200]))),
                                     child: TextField(
                                       decoration: InputDecoration(
-                                          hintText: "Phone number",
+                                          hintText: "Email",
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
-                                      controller: _phoneController,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.grey[200]))),
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                          hintText: "Phone No",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none),
                                     ),
                                   ),
                                   Container(
@@ -117,8 +112,20 @@ class HomePage extends StatelessWidget {
                                           hintStyle:
                                               TextStyle(color: Colors.grey),
                                           border: InputBorder.none),
-                                      controller: _passController,
-                                      obscureText: true,
+                                    ),
+                                  ),
+                                  Container(
+                                    padding: EdgeInsets.all(10),
+                                    decoration: BoxDecoration(
+                                        border: Border(
+                                            bottom: BorderSide(
+                                                color: Colors.grey[200]))),
+                                    child: TextField(
+                                      decoration: InputDecoration(
+                                          hintText: "Confirm Password",
+                                          hintStyle:
+                                              TextStyle(color: Colors.grey),
+                                          border: InputBorder.none),
                                     ),
                                   ),
                                 ],
@@ -128,34 +135,9 @@ class HomePage extends StatelessWidget {
                           height: 40,
                         ),
                         FadeAnimation(
-                            1.5,
-                            GestureDetector(
-                              onTap: () {
-                                print("Forgot Password?");
-                              },
-                              child: Text(
-                                "Forgot Password?",
-                                style: TextStyle(color: Colors.grey),
-                              ),
-                            )),
-                        SizedBox(
-                          height: 40,
-                        ),
-                        FadeAnimation(
                             1.6,
                             GestureDetector(
-                              onTap: () {
-                                //   print(
-                                //       "${_phoneController.text} ${_passController.text}");
-
-                                // ##
-                                // Navigator.push(
-                                //     context,
-                                //     MaterialPageRoute(
-                                //         builder: (context) =>
-                                //             CheckLoginStudent()));
-                                // ##
-                              },
+                              onTap: () {},
                               child: Container(
                                 height: 50,
                                 margin: EdgeInsets.symmetric(horizontal: 50),
@@ -164,7 +146,7 @@ class HomePage extends StatelessWidget {
                                     color: Colors.orange[900]),
                                 child: Center(
                                   child: Text(
-                                    "Login",
+                                    "Sign Me Up",
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -178,7 +160,7 @@ class HomePage extends StatelessWidget {
                         FadeAnimation(
                             1.7,
                             Text(
-                              "Continue with Roomie",
+                              "Welcome To Roomie",
                               style: TextStyle(color: Colors.grey),
                             )),
                         SizedBox(
@@ -190,15 +172,7 @@ class HomePage extends StatelessWidget {
                               child: FadeAnimation(
                                   1.8,
                                   GestureDetector(
-                                    onTap: () {
-                                      print('Sign Up');
-
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  StudentSignUP()));
-                                    },
+                                    onTap: () {},
                                     child: Container(
                                       height: 50,
                                       decoration: BoxDecoration(
@@ -207,7 +181,7 @@ class HomePage extends StatelessWidget {
                                           color: Colors.blue),
                                       child: Center(
                                         child: Text(
-                                          "Sign Up",
+                                          "Login",
                                           style: TextStyle(
                                               color: Colors.white,
                                               fontWeight: FontWeight.bold),
@@ -223,9 +197,7 @@ class HomePage extends StatelessWidget {
                               child: FadeAnimation(
                                   1.9,
                                   GestureDetector(
-                                    onTap: () {
-                                      print('Not Student?');
-                                    },
+                                    onTap: () {},
                                     child: Container(
                                       height: 50,
                                       decoration: BoxDecoration(
