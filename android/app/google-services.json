@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "946949620093",
+    "firebase_url": "https://linuxauth.firebaseio.com",
+    "project_id": "linuxauth",
+    "storage_bucket": "linuxauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:946949620093:android:412dfd7e88ac01c79d8c14",
+        "android_client_info": {
+          "package_name": "om.example.authentication_module"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "946949620093-3h4mrib9d2gm1ce1djm962r0thltaiuu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0a7vMGkKyIHlrjQFxllyT_k24ImTGKEg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "946949620093-3h4mrib9d2gm1ce1djm962r0thltaiuu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
