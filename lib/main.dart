@@ -180,8 +180,8 @@ class HomePage extends StatelessWidget {
                                   //             CheckLoginStudent()));
                                   // ##
                                 },
-                                child: RaisedButton(
-                                  onPressed: signIn,
+                                child: GestureDetector(
+                                  onTap: signIn,
                                   child: Container(
                                     height: 50,
                                     margin:
