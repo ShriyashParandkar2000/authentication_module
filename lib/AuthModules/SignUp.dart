@@ -3,6 +3,7 @@ import 'package:authentication_module/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'Designs/design.dart';
 
 class StudentSignUP extends StatefulWidget {
@@ -25,15 +26,14 @@ class _StudentSignUPState extends State<StudentSignUP> {
         width: double.infinity,
         decoration: BoxDecoration(
             gradient: LinearGradient(begin: Alignment.topCenter, colors: [
-          Colors.orange[900],
-          Colors.orange[800],
-          Colors.orange[400]
+          Hexcolor("#83EAF1"),
+          Hexcolor("#63A4FF"),
         ])),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: 80,
+              height: 100,
             ),
             Padding(
               padding: EdgeInsets.all(20),
@@ -82,7 +82,7 @@ class _StudentSignUPState extends State<StudentSignUP> {
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
-                                        color: Color.fromRGBO(225, 95, 27, .3),
+                                        color: Hexcolor("#83EAF1"),
                                         blurRadius: 20,
                                         offset: Offset(0, 10))
                                   ]),
@@ -187,13 +187,15 @@ class _StudentSignUPState extends State<StudentSignUP> {
                                 height: 50,
                                 margin: EdgeInsets.symmetric(horizontal: 50),
                                 decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(50),
-                                    color: Colors.orange[900]),
+                                  borderRadius: BorderRadius.circular(50),
+                                  color: Hexcolor("#00efff"),
+                                ),
                                 child: Center(
                                   child: Text(
                                     "Sign Me Up",
                                     style: TextStyle(
                                         color: Colors.white,
+                                        fontSize: 17,
                                         fontWeight: FontWeight.bold),
                                   ),
                                 ),
@@ -229,7 +231,7 @@ class _StudentSignUPState extends State<StudentSignUP> {
                                       decoration: BoxDecoration(
                                           borderRadius:
                                               BorderRadius.circular(50),
-                                          color: Colors.blue),
+                                          color: Hexcolor("#045DE9")),
                                       child: Center(
                                         child: Text(
                                           "Login",

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Home extends StatefulWidget {
   Home({Key key, this.user}) : super(key: key);
@@ -18,7 +19,7 @@ class _HomeState extends State<Home> {
         title: Text("Welcome to Roomie"),
         brightness: Brightness.light,
         elevation: 0,
-        backgroundColor: Colors.orange[900],
+        backgroundColor: Hexcolor("#83EAF1"),
         bottomOpacity: 0.0,
         leading: IconButton(
             icon: Icon(Icons.menu), color: Colors.black87, onPressed: () {}),
