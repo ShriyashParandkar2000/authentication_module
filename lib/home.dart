@@ -15,12 +15,14 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home"),
+        title: Text("Welcome to Roomie"),
+        brightness: Brightness.light,
+        elevation: 0,
+        backgroundColor: Colors.orange[900],
+        bottomOpacity: 0.0,
+        leading: IconButton(
+            icon: Icon(Icons.menu), color: Colors.black87, onPressed: () {}),
       ),
-      body: Container(
-          child: Center(
-              // child: Text("Home ${widget.user.email}"),
-              )),
     );
   }
 }

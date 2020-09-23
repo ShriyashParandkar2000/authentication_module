@@ -1,8 +1,9 @@
+import 'package:authentication_module/AuthModules/loginPage.dart';
 import 'package:authentication_module/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:simple_animations/simple_animations.dart';
+import 'Designs/design.dart';
 
 class StudentSignUP extends StatefulWidget {
   @override
@@ -216,7 +217,13 @@ class _StudentSignUPState extends State<StudentSignUP> {
                               child: FadeAnimation(
                                   1.8,
                                   GestureDetector(
-                                    onTap: () {},
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginPage()));
+                                    },
                                     child: Container(
                                       height: 50,
                                       decoration: BoxDecoration(
@@ -273,11 +280,19 @@ class _StudentSignUPState extends State<StudentSignUP> {
     );
   }
 
+  void check() {
+    if (_pass.toString() == _confirmPass.toString()) {
+      SnackBar(content: Text("Check your password again!!"));
+    }
+    if (_phoneNumber.toString().length == 10) {
+      SnackBar(content: Text("Phone number is not correct"));
+    }
+  }
+// Firebase method for SignUp
+
   Future<void> signUp() async {
     final formstate = _formkeySignUp.currentState;
 
-    // if (_pass.toString() == _confirmPass.toString() &&
-    //     _phoneNumber.toString().length == 10) {
     if (formstate.validate()) {
       // Login to firebase
       formstate.save();
@@ -295,42 +310,3 @@ class _StudentSignUPState extends State<StudentSignUP> {
     }
   }
 }
-
-// ##################################################################################
-// Animation effect
-// ##################################################################################
-
-class FadeAnimation extends StatelessWidget {
-  final double delay;
-  final Widget child;
-
-  FadeAnimation(this.delay, this.child);
-
-  @override
-  Widget build(BuildContext context) {
-    // ignore: deprecated_member_use
-    final tween = MultiTrackTween([
-      // ignore: deprecated_member_use
-      Track("opacity")
-          .add(Duration(milliseconds: 500), Tween(begin: 0.0, end: 1.0)),
-      // ignore: deprecated_member_use
-      Track("translateY").add(
-          Duration(milliseconds: 500), Tween(begin: -30.0, end: 0.0),
-          curve: Curves.easeOut)
-    ]);
-
-    // ignore: deprecated_member_use
-    return ControlledAnimation(
-      delay: Duration(milliseconds: (500 * delay).round()),
-      duration: tween.duration,
-      tween: tween,
-      child: child,
-      builderWithChild: (context, child, animation) => Opacity(
-        opacity: animation["opacity"],
-        child: Transform.translate(
-            offset: Offset(0, animation["translateY"]), child: child),
-      ),
-    );
-  }
-}
-//######################################################################################################
