@@ -1,9 +1,24 @@
+import 'package:authentication_module/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:simple_animations/simple_animations.dart';
 
-class StudentSignUP extends StatelessWidget {
+class StudentSignUP extends StatefulWidget {
+  @override
+  _StudentSignUPState createState() => _StudentSignUPState();
+}
+
+class _StudentSignUPState extends State<StudentSignUP> {
+  BuildContext _c;
+
+  String _email, _pass, _confirmPass, _phoneNumber;
+
+  final GlobalKey<FormState> _formkeySignUp = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
+    _c = context;
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -70,65 +85,92 @@ class StudentSignUP extends StatelessWidget {
                                         blurRadius: 20,
                                         offset: Offset(0, 10))
                                   ]),
-                              child: Column(
-                                children: <Widget>[
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                          hintText: "Email",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
+                              child: Form(
+                                key: _formkeySignUp,
+                                child: Column(
+                                  children: <Widget>[
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.grey[200]))),
+                                      child: TextFormField(
+                                        onSaved: (input) => _email = input,
+                                        validator: (input) {
+                                          if (input.isEmpty) {
+                                            SnackBar(
+                                                content: Text(
+                                                    "please type and email"));
+                                            return "please type and email";
+                                          }
+                                          return null;
+                                        },
+                                        decoration: InputDecoration(
+                                            hintText: "Email",
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: InputBorder.none),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                          hintText: "Phone No",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.grey[200]))),
+                                      child: TextFormField(
+                                        keyboardType: TextInputType.phone,
+                                        validator: (value) {
+                                          if (value.isEmpty) {
+                                            SnackBar(
+                                                content:
+                                                    Text("Enter Phone No."));
+                                          }
+                                          return null;
+                                        },
+                                        onSaved: (newValue) =>
+                                            _phoneNumber = newValue,
+                                        decoration: InputDecoration(
+                                            hintText: "Phone No",
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: InputBorder.none),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                          hintText: "Password",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.grey[200]))),
+                                      child: TextFormField(
+                                        onSaved: (newValue) => _pass = newValue,
+                                        decoration: InputDecoration(
+                                            hintText: "Password",
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: InputBorder.none),
+                                      ),
                                     ),
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.all(10),
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                color: Colors.grey[200]))),
-                                    child: TextField(
-                                      decoration: InputDecoration(
-                                          hintText: "Confirm Password",
-                                          hintStyle:
-                                              TextStyle(color: Colors.grey),
-                                          border: InputBorder.none),
+                                    Container(
+                                      padding: EdgeInsets.all(10),
+                                      decoration: BoxDecoration(
+                                          border: Border(
+                                              bottom: BorderSide(
+                                                  color: Colors.grey[200]))),
+                                      child: TextFormField(
+                                        onSaved: (newValue) =>
+                                            _confirmPass = newValue,
+                                        decoration: InputDecoration(
+                                            hintText: "Confirm Password",
+                                            hintStyle:
+                                                TextStyle(color: Colors.grey),
+                                            border: InputBorder.none),
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             )),
                         SizedBox(
@@ -137,7 +179,9 @@ class StudentSignUP extends StatelessWidget {
                         FadeAnimation(
                             1.6,
                             GestureDetector(
-                              onTap: () {},
+                              onTap: () {
+                                signUp();
+                              },
                               child: Container(
                                 height: 50,
                                 margin: EdgeInsets.symmetric(horizontal: 50),
@@ -227,6 +271,28 @@ class StudentSignUP extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<void> signUp() async {
+    final formstate = _formkeySignUp.currentState;
+
+    // if (_pass.toString() == _confirmPass.toString() &&
+    //     _phoneNumber.toString().length == 10) {
+    if (formstate.validate()) {
+      // Login to firebase
+      formstate.save();
+      await Firebase.initializeApp();
+      try {
+        UserCredential user = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: _email, password: _pass);
+
+        Navigator.of(context).pop();
+        Navigator.push(_c, MaterialPageRoute(builder: (context) => HomePage()));
+        user = user;
+      } catch (e) {
+        print(e.message);
+      }
+    }
   }
 }
 

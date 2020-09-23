@@ -11,12 +11,16 @@ void main() => runApp(MaterialApp(
       home: HomePage(),
     ));
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   @override
-  BuildContext _c;
-  String _email, _password;
-  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  _HomePageState createState() => _HomePageState();
+}
 
+class _HomePageState extends State<HomePage> {
+  final GlobalKey<FormState> _formkey = GlobalKey<FormState>();
+  String _email, _password;
+  BuildContext _c;
+  @override
   Widget build(BuildContext context) {
     _c = context;
     return Scaffold(
@@ -112,6 +116,7 @@ class HomePage extends StatelessWidget {
                                                     "please type and email"));
                                             return "please type and email";
                                           }
+                                          return null;
                                         },
                                         onSaved: (input) => _email = input,
                                         decoration: InputDecoration(
@@ -135,6 +140,7 @@ class HomePage extends StatelessWidget {
                                                     "please type a Password"));
                                             return "please enter password";
                                           }
+                                          return null;
                                         },
                                         onSaved: (input) => _password = input,
                                         decoration: InputDecoration(
@@ -296,7 +302,8 @@ class HomePage extends StatelessWidget {
         UserCredential user = await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password);
 
-        Navigator.push(_c, MaterialPageRoute(builder: (context) => Home()));
+        Navigator.push(
+            _c, MaterialPageRoute(builder: (context) => Home(user: user)));
       } catch (e) {
         print(e.message);
       }
